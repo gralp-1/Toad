@@ -19,7 +19,7 @@ def base_path() -> Path:
     if sys.platform == "win32":
         return Path(os.getenv("APPDATA")) / "toad" / "tasks.pickle"
     else:
-        return Path(os.getenv("HOME")) / ".config" / "toad" / "tasks.pickle"
+        return Path(os.getenv("HOME")) / ".config" / "toad"
 
 
 data_path = base_path() / "tasks.pickle"
@@ -62,6 +62,10 @@ class Toad(object):
         """
         List all tasks
         """
+        # check if the list is empty
+        if len(self.__items) == 0:
+            print("No tasks to do!")
+            return
         table = pt.PrettyTable()
         table.field_names = ["Index", "Name", "Set Time", "Complete"]
         for index, item in self.__items.items():
