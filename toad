@@ -42,10 +42,17 @@ class Toad(object):
     def __init__(self):
         self.__items = self.__load_data()
 
-    def done(self, index: int):
+    def done(self, index: int | str):
+        if not (index in self.__items.keys() or index == "all" or index == "*"):
+            print(f"Invalid argument {index} should be an index or 'all' or '*'")
+            return
         """
         Complete a task at the given index
         """
+        if index == "all" or index == "*":
+            for index in self.__items.keys():
+                self.__items[index]["complete"] = True
+            return
         self.__items[index]["complete"] = True
 
     def list(self):
