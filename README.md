@@ -18,6 +18,7 @@ toad list # lists all tasks
 ```
 ```bash
 toad done 1 # marks task 1 as done
+toad done all # marks all tasks as done
 ```
 ```bash
 toad delete 1 # deletes task 1

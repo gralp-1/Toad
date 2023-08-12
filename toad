@@ -43,6 +43,9 @@ class Toad(object):
         self.__items = self.__load_data()
 
     def done(self, index: int | str):
+        """
+        Complete a task at given index (or 'all' or '*')
+        """
         if not (index in self.__items.keys() or index == "all" or index == "*"):
             print(f"Invalid argument {index} should be an index or 'all' or '*'")
             return
