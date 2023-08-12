@@ -5,7 +5,6 @@
 
 import sys
 import os
-import yaml
 from pathlib import Path
 import fire
 import pickle
@@ -23,22 +22,16 @@ def base_path() -> Path:
         return Path(os.getenv("HOME")) / ".config" / "toad" / "tasks.pickle"
 
 
-# config_path = base_path() / "config.yaml"
 data_path = base_path() / "tasks.pickle"
 
 
 def check_first_run():
     """if data_path() does not exist, create it and write an empty dict to it"""
     base_path_exists = base_path().exists()
-    # config_path_exists = config_path.exists()
     data_path_exists = data_path.exists()
     if not base_path_exists:
         print("Creating toad path")
         os.makedirs(base_path())
-    # if not config_path_exists:
-    #    print("Creating config file")
-    #    with open(config_path, "w") as f:
-    #        yaml.dump({}, f)
     if not data_path_exists:
         print("Creating tasks save file")
         with open(data_path, "wb") as f:
@@ -65,7 +58,7 @@ class Toad(object):
             complete_string = "✅" if item["complete"] else "❌"
             # format time
             time_string = time.strftime(
-                "%Y-%m-%d %H:%M:%S", time.localtime(item["set_time"])
+                "%Y-%m-%d %H:%M", time.localtime(item["set_time"])
             )
             table.add_row([index, item["name"], time_string, complete_string])
         print(table)
@@ -79,6 +72,7 @@ class Toad(object):
             "set_time": time.time(),
             "complete": False,
         }
+        self.list()
 
     def remove(self, index: int):
         """

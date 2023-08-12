@@ -4,7 +4,7 @@ A simple command line to do list manager
 
 # Installation
 ```bash
-git clone
+git clone https://github.com/gralp-1/Toad.git
 cd Toad
 pip install -r requirements.txt
 ```
